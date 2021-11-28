@@ -13,10 +13,13 @@ def exif_collect(img, file):
 
   file_format = file.split('.') # On sépare le nom du format dans une liste
   file_format = file_format[-1] # On ne garde que le dernier élément de la liste, qui correspond au format
+  
+  date = img.get('datetime_original')
 
-  date = img.get('datetime').split()
-  date = date[0].split(':')
-  date = "-".join(date)
+  if date != None:
+    date = date.split()
+    date = date[0].split(':')
+    date = "-".join(date)
   
   location = [img.get('gps_longitude'), img.get('gps_latitude')]
   

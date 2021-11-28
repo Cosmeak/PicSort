@@ -4,6 +4,7 @@ from exif import Image
 from functions import is_img, exif_collect
 
 def pictures_sort(folder):
+  os.chdir(folder)
   files = os.listdir(folder) # On liste tout les éléments se trouvant dans le dossier
 
   for i in range (len(files)): # Parcout de l'entiereté des fichiers
@@ -17,6 +18,8 @@ def pictures_sort(folder):
       img_data = exif_collect(img, file)
 
       os.rename(f'{img_data.get("name")}', f'{img_data.get("location")}_{img_data.get("date")}_{i}.{img_data.get("format")}')
+
+      print('File sort !')
     
     # else: #envoyer le fichier dans un dossier avec tout ce qui n'est pas une photo puis retrier les éléments déplacer (dossier à trouver et à renvoyer être trier -> récursivité)
     #   shutil.move(file_path, f'{folder}\others')
@@ -24,7 +27,8 @@ def pictures_sort(folder):
 
     img_file.closed
 
-  return 'All files are sort !'
+  print('All files are sort !')
+  return
 
 
 
