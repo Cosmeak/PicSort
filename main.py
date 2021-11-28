@@ -1,26 +1,22 @@
-import os
-from exif import Image
+# Import librairies
+import os, shutil
 
 folder = input('Copy paste link of your pictures folder')
 
-files = os.listdir(folder) #On liste tout les éléments se trouvant dans le dossier
+files = os.listdir(folder) # On liste tout les éléments se trouvant dans le dossier
 
-for i in range (len(files)): #parcout de l'entiereté des fichiers
-  img_path = f'{folder}/{files[i]}'
+os.mkdir (f'{folder}/others') # On crée un dossier qui va contenir tout ce qui n'est pas une image
 
-  with open(img_path, 'rb') as img_file: #On crée une classe qui va nous servir à vérifier que le fichier est bien une image
+for i in range (len(files)): # Parcout de l'entiereté des fichiers
+  file = files[i]
+  file_path = f'{folder}/{file}'
+
+  with open(file_path, 'rb') as img_file:
     img = Image(img_file)
 
-  if img.has_exif == true: #*On vérifie que le fichier et une image, si c'est le on récupère les données, sinon on va faire une boucle récursive qui va faire ouvrir le dossier si s'en ai un sinon déplacer ce fichier dans un dossier rebus
+  if is_img(img) == true:
+    img_data = exif_collect(img)
 
-    #On va récupérer toutes les données exif de la photo qui nous intéresse et nous servirions à les trier plus tard
-    img_name = files[i]
-    datetime = img.get('datetime')
-    datetime_digitized = img.get('datetime_digitized')
-    datetime_original = img.get('datetime_original')
-    place = [img.get('gps_longitude'), img.get(gps_latitude)]
-
-    date = [
-
-    ]
-    #Il faut créer les dictionnaire puis append dedans les données exif que l'on vient de récuperer
+  else:
+    #envoyer le fichier dans un dossier avec tout ce qui n'est pas une photo 
+    shutil.move(file_path, f'{folder}/others/{file}')
