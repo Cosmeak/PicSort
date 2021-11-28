@@ -18,6 +18,13 @@ def pictures_sort(folder):
     if is_img(img) == true:
       img_data = exif_collect(img)
 
+      img_format = img_data.split('.') # On sépare le nom du format dans une liste
+      img_format = img_format[-1] # On ne garde que le dernier élément de la liste, qui correspond au format
+
+      os.rename(f'{img_data.get("name")}', f'{img_data.get("location")}_{img_data.get("date")}_{i}.{img_format}')
+
     else: #envoyer le fichier dans un dossier avec tout ce qui n'est pas une photo puis retrier les éléments déplacer (dossier à trouver et à renvoyer être trier -> récursivité)
       shutil.move(file_path, f'{folder}/others/{file}')
       return pictures_sort(f'{folder}/others')
+
+    return 'All files are sort !'
