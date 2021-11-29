@@ -24,7 +24,7 @@ def exif_collect(img, file):
   
   location = [img.get('gps_longitude'), img.get('gps_latitude')]
   
-  for i in range (len(location)):
+  for i in range(len(location)):
     if location[i] == None:
       location = 'location-inconnu'
 

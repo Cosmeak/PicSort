@@ -36,8 +36,9 @@ def pictures_sort(folder):
 # Instruction
 ##############################################################################
 
-folder = input('Copy paste link of your pictures folder : ')
+folder_src = input('Copy paste link of your pictures folder : ')
 
-pictures_sort(folder)
+pictures_sort(folder_src)
 
-# os.mkdir(f'{folder}/others') # On crée un dossier qui va contenir tout ce qui n'est pas une image
+# os.mkdir(f'{folder}\others') # On crée un dossier qui va contenir tout ce qui n'est pas une image
+# os.mkdir(f'{folder}\to_sort') # On crée un dossier qui va contenir les dossiers qui se trouver dans le dossier source et qui doivent être trier aussi
