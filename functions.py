@@ -1,5 +1,6 @@
 # Import librairies
 import exif
+from geopy.geocoders import Nominatim
 
 #check if the file is an img
 def is_img(file):
@@ -37,3 +38,15 @@ def exif_collect(img, file):
     'location': location
   }
   return img_data
+
+
+# Get location with latitude and longitude 
+def get_location(latidute, longitude):
+  geoLoc = Nominatim(user_agent="GetLoc") 
+  location = geoLoc.reverse(latidute, longitude)
+  location = location.split("")
+  location = {
+    'country': location[0],
+    'city': location[-1]
+  }
+  return location
