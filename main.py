@@ -23,14 +23,11 @@ def exif_collect(img, file):
     date = date[0].split(':')
     date = "-".join(date)
   
-  location = [img.get('gps_longitude'), img.get('gps_latitude')]
-  
-  for i in range(len(location)):
-    if location[i] == None:
-      location = 'location-inconnu'
+  latitude, longitude = img.get('gps_latitude'), img.get('gps_longitude')
+  empty_check_and_replace(latitude, '()')
+  empty_check_and_replace(longitude, '()')
 
-  if location == list:
-    location = "-".join(location)
+  location = get_location(latidute, longitude)
 
   img_data = {
     'name': file,
@@ -51,10 +48,29 @@ def get_location(latidute, longitude):
   return location
 
 
+# Replace characters in strings
+def string_replace(string, charac):
+  for i in range(len(string)):
+    string = string.replace(charac[i], "")
+  return string
+
+def empty_check_and_replace(var, charac):
+  if var != None:
+    string_replace(var, charac)
+    var = var.split()
+    var = var[-1]
+    return var
+
 #Sort function
 def pictures_sort(folder):
   os.chdir(folder)
   files = os.listdir(folder) # On liste tout les éléments se trouvant dans le dossier
+
+  if os.path.exists(f'{folder}\others') != True:
+    os.makedirs(f'{folder}\others')
+  
+  if os.path.exists(f'{folder}\need_to_sort') != True:
+    os.makedirs(f'{folder}\need_to_sort') 
 
   for i in range (len(files)): # Parcout de l'entiereté des fichiers
     file = files[i]
@@ -80,15 +96,10 @@ def pictures_sort(folder):
   return
 
 
-
 ##############################################################################
-# Instruction
+# Instructions
 ##############################################################################
 
 folder_src = input('Copy paste link of your pictures folder : ')
 
 pictures_sort(folder_src)
-
-# os.mkdir(f'{folder}\others') # On crée un dossier qui va contenir tout ce qui n'est pas une image
-# os.mkdir(f'{folder}\need_to_sort') # On crée un dossier qui va contenir les dossiers qui se trouver dans le dossier source et qui doivent être trier aussi
-
