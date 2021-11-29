@@ -69,8 +69,8 @@ def pictures_sort(folder):
   if os.path.exists(f'{folder}\others') != True:
     os.makedirs(f'{folder}\others')
   
-  if os.path.exists(f'{folder}\need_to_sort') != True:
-    os.makedirs(f'{folder}\need_to_sort') 
+  if os.path.exists(f'{folder}\\need_to_sort') != True:
+    os.makedirs(f'{folder}\\need_to_sort') 
 
   for i in range (len(files)): # Parcout de l'entiereté des fichiers
     file = files[i]
