@@ -1,1 +1,0 @@
-## Explanation of how works this project

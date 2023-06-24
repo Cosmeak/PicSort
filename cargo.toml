@@ -1,0 +1,4 @@
+[dependencies]
+exif = "0.8.1"
+chrono = "0.4.19"
+geocoder = "0.2.0"
